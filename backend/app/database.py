@@ -14,6 +14,10 @@ DATABASE_URL = URL.create(
     host=os.getenv("DB_HOST"),
     port=int(os.getenv("DB_PORT", "3306")),
     database=os.getenv("DB_NAME"),
+        query={
+        "ssl_verify_cert": "true",
+        "ssl_verify_identity": "true",
+    },
 )
 
 engine = create_engine(
