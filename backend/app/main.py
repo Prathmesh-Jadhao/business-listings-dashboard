@@ -8,11 +8,25 @@ from app.models import Listing
 from app.routes.listings import router as listings_router
 from app.routes.dashboard import router as dashboard_router
 
+from fastapi.middleware.cors import CORSMiddleware
+
 app = FastAPI(
     title="Business Listings Dashboard API",
     description="API for collecting and analyzing business listings",
     version="1.0.0"
 )
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "https://business-listings-dashboard-three.vercel.app",
+        "http://localhost:5173",
+    ],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 app.include_router(listings_router)
 app.include_router(dashboard_router)
 
